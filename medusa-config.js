@@ -43,40 +43,39 @@ const plugins = [
       upload_dir: 'uploads',
     },
   },
+  // {
+  //   resolve: `medusa-plugin-meilisearch`,
+  //   options: {
+  //     config: {
+  //       host: process.env.MEILISEARCH_HOST,
+  //       apiKey: process.env.MEILISEARCH_API_KEY,
+  //     },
+  //     settings: {
+  //       products: {
+  //         indexSettings: {
+  //           searchableAttributes: ['title', 'description', 'variant_sku'],
+  //           displayedAttributes: [
+  //             'title',
+  //             'description',
+  //             'variant_sku',
+  //             'thumbnail',
+  //             'handle',
+  //           ],
+  //         },
+  //         primaryKey: 'id',
+  //         transformer: (product) => ({
+  //           id: product.id,
+  //         }),
+  //       },
+  //     },
+  //   },
+  // },
   {
-    resolve: `medusa-plugin-meilisearch`,
-    options: {
-      config: {
-        host: process.env.MEILISEARCH_HOST,
-        apiKey: process.env.MEILISEARCH_API_KEY,
-      },
-      settings: {
-        products: {
-          indexSettings: {
-            searchableAttributes: ['title', 'description', 'variant_sku'],
-            displayedAttributes: [
-              'title',
-              'description',
-              'variant_sku',
-              'thumbnail',
-              'handle',
-            ],
-          },
-          primaryKey: 'id',
-          transformer: (product) => ({
-            id: product.id,
-          }),
-        },
-      },
-    },
-  },
- {
     resolve: `medusa-plugin-sendgrid`,
     options: {
       api_key: process.env.SENDGRID_API_KEY,
       from: process.env.SENDGRID_FROM,
-      order_placed_template: 
-        process.env.SENDGRID_ORDER_PLACED_ID,
+      order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
     },
   },
   // To enable the admin plugin, uncomment the following lines and run `yarn add @medusajs/admin`

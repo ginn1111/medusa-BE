@@ -1,16 +1,18 @@
-import {Customer, EventBusService} from '@medusajs/medusa'
-import sgMail from '@sendgrid/mail'
+import { Customer, EventBusService } from '@medusajs/medusa';
+import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 type InjectedDependencies = {
-  eventBusService: EventBusService,
-}
+  eventBusService: EventBusService;
+};
 
 class CustomerConfirmationSubscriber {
-  constructor({eventBusService}: InjectedDependencies) {
-    eventBusService.subscribe('customer.created', this.handleCustomerConfirmation)
+  constructor({ eventBusService }: InjectedDependencies) {
+    eventBusService.subscribe(
+      'customer.created',
+      this.handleCustomerConfirmation
+    );
   }
 
   handleCustomerConfirmation = async (data: Customer) => {
@@ -21,10 +23,10 @@ class CustomerConfirmationSubscriber {
       dynamicTemplateData: {
         first_name: data.first_name,
         last_name: data.last_name,
-        shop_url: process.env.SHOP_URL
-      }
-    })
-  }
+        shop_url: process.env.SHOP_URL,
+      },
+    });
+  };
 }
 
 export default CustomerConfirmationSubscriber;
