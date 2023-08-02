@@ -43,33 +43,6 @@ const plugins = [
       upload_dir: 'uploads',
     },
   },
-  // {
-  //   resolve: `medusa-plugin-meilisearch`,
-  //   options: {
-  //     config: {
-  //       host: process.env.MEILISEARCH_HOST,
-  //       apiKey: process.env.MEILISEARCH_API_KEY,
-  //     },
-  //     settings: {
-  //       products: {
-  //         indexSettings: {
-  //           searchableAttributes: ['title', 'description', 'variant_sku'],
-  //           displayedAttributes: [
-  //             'title',
-  //             'description',
-  //             'variant_sku',
-  //             'thumbnail',
-  //             'handle',
-  //           ],
-  //         },
-  //         primaryKey: 'id',
-  //         transformer: (product) => ({
-  //           id: product.id,
-  //         }),
-  //       },
-  //     },
-  //   },
-  // },
   {
     resolve: `medusa-plugin-sendgrid`,
     options: {
@@ -78,30 +51,16 @@ const plugins = [
       order_placed_template: process.env.SENDGRID_ORDER_PLACED_ID,
     },
   },
-  // To enable the admin plugin, uncomment the following lines and run `yarn add @medusajs/admin`
-  // {
-  //   resolve: '@medusajs/admin',
-  //   /** @type {import('@medusajs/admin').PluginOptions} */
-  //   options: {
-  //     autoRebuild: true,
-  //   },
-  // },
+  {
+    resolve: `medusa-payment-stripe`,
+    options: {
+      api_key: process.env.STRIPE_API_KEY,
+      webhook_secret: process.env.STRIPE_WEBHOOK_SECRET,
+    },
+  },
 ];
 
-const modules = {
-  /*eventBus: {
-    resolve: "@medusajs/event-bus-redis",
-    options: {
-      redisUrl: REDIS_URL
-    }
-  },
-  cacheService: {
-    resolve: "@medusajs/cache-redis",
-    options: {
-      redisUrl: REDIS_URL
-    }
-  },*/
-};
+const modules = {};
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
 const projectConfig = {
