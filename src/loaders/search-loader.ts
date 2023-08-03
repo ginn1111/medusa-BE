@@ -7,5 +7,9 @@ export default async (container: AwilixContainer): Promise<void> => {
   const meiliSearchService =
     container.resolve<MeiliSearchService>('meiliSearchService');
   const productList = await productService.list({});
-  await meiliSearchService.addDocuments('products', productList, 'products');
+  await meiliSearchService.addDocuments(
+    'products',
+    productList.filter((product) => product.status === 'published') ?? [],
+    'products'
+  );
 };

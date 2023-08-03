@@ -16,6 +16,7 @@ class CustomerConfirmationSubscriber {
   }
 
   handleCustomerConfirmation = async (data: Customer) => {
+    if (data.has_account) return;
     await sgMail.send({
       templateId: process.env.SENDGRID_TEMPLATE_ID_CUSTOMER_CONFIRMATION,
       from: process.env.SENDGRID_FROM,
